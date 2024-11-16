@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% for cart in carts %}
+    {{cart.item}}
+    {{cart.quantity}}
+    {% endfor %} 
+    <a href="{% url 'address_order' %}">Сделать заказ</a>
+</body>
+</html>

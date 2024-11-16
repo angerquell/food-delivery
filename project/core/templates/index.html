@@ -12,6 +12,8 @@
     {{food.calories}}
     <img src={{food.image.url}} />
     {{food.description}}
+    <a href="{% url 'add_cart' food.pk %}">Добавить в корзину </a>
+
     {% endfor %}
 </body>
 </html>
