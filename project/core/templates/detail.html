@@ -2,10 +2,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/detail_style.css' %}" />
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Детали продукта</title>
+
 </head>
 <body>
     <header>
@@ -30,20 +32,26 @@
     </header>
 
     <div class="container">
-        <h1>Список продуктов</h1>
-        <div class="product-list">
-            {% for food in foods %}
-            <a href="{% url 'home:detail' food.pk %}" style="outline: none;">
-            <div class="product-card">
+        <div class="product-detail">
+            <div class="product-image">
                 <img src="{{ food.image.url }}" alt="{{ food.name }}">
-                <h3>{{ food.name }}</h3>
-                <p>Цена: {{ food.price }} ₽</p>
-                <p>Калории: {{ food.calories }} ккал</p>
-                <p>{{ food.description }}</p>
-                <a href="{% url 'home:add_cart' food.pk %}" class="link">Добавить в корзину</a>
             </div>
-            </a>
-            {% endfor %}
+            <div class="product-info">
+                <h1>{{ food.name }}</h1>
+                <p class="categories">
+                    Категории: 
+                    {% for category in food.category.all %}
+                        {{ category.name }}{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                </p>
+                <p>Описание: {{ food.description }}</p>
+                <p>Калории: {{ food.calories }} ккал</p>
+                <p class="price">Цена: {{ food.price }} ₽</p>
+                <div class="actions">
+                    <a href="{% url 'home:add_cart' food.pk %}">Добавить в корзину</a>
+                    <a href="{% url 'home:home' %}">Вернуться к списку продуктов</a>
+                </div>
+            </div>
         </div>
     </div>
 

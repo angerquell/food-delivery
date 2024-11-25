@@ -57,5 +57,10 @@ class Cart(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     item = models.ForeignKey(Food, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
+    price = models.DecimalField(blank=True, null=True, max_digits=10, decimal_places=2)
+    def save(self, *args, **kwargs):
+        self.price = self.item.price * self.quantity
+        super(Cart, self).save(*args, **kwargs)
+
 
     
