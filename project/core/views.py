@@ -5,6 +5,7 @@ from django.db.models import F
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.db.models import Sum
+from django.contrib.auth.decorators import login_required
 
 
 class Detail(DetailView):
@@ -25,7 +26,7 @@ class Index(ListView):
     model = Food
     context_object_name = 'foods'
     template_name = 'index.html'
-    paginate_by = 4
+    paginate_by = 2
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -36,13 +37,14 @@ class Index(ListView):
             context['cart_item_count'] = 0
         return context
 
-
+@login_required
 def cart(request):
     cart = Cart.objects.filter(user = request.user)
 
     total_price = sum([i.price for i in cart])
     return render(request, 'cart.html', {"carts":cart, 'total_price':total_price})
 
+@login_required
 def add_cart(request, pk):
     food = Food.objects.get(pk=pk)
     cart, created = Cart.objects.get_or_create(user = request.user, item = food)

@@ -30,7 +30,7 @@
     </header>
 
     <div class="container">
-        <h1>Список продуктов</h1>
+        <h1>Наша продукция</h1>
         <div class="product-list">
             {% for food in foods %}
             <a href="{% url 'home:detail' food.pk %}" style="outline: none;">
@@ -46,7 +46,19 @@
             {% endfor %}
         </div>
     </div>
-
+    <div class="pagination">
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}" class="page-link">Предыдущая</a>
+        {% endif %}
+    
+        <span>Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}</span>
+    
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}" class="page-link">Следующая</a>
+        {% endif %}
+    </div>
+    
+    
     <footer>
         &copy; 2024 Food Delivery. Все права защищены.
     </footer>

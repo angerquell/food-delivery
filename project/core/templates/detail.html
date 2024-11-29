@@ -45,11 +45,12 @@
                     {% endfor %}
                 </p>
                 <p>Описание: {{ food.description }}</p>
+                <p>Состав: {{food.compound}}</p>
                 <p>Калории: {{ food.calories }} ккал</p>
                 <p class="price">Цена: {{ food.price }} ₽</p>
                 <div class="actions">
                     <a href="{% url 'home:add_cart' food.pk %}">Добавить в корзину</a>
-                    <a href="{% url 'home:home' %}">Вернуться к списку продуктов</a>
+                    <a href="{% url 'home:home' %}">Вернуться на главную страницу</a>
                 </div>
             </div>
         </div>

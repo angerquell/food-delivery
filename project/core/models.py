@@ -17,6 +17,7 @@ class Category(models.Model):
 
 
 class Food(models.Model):
+    compound = models.CharField(max_length=255, blank=True, null=True)
     name = models.CharField(max_length=100)
     category = models.ManyToManyField(Category)
     image = models.ImageField(upload_to='food')
